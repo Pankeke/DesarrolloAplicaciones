@@ -20,7 +20,7 @@ public class HelloWorld2 extends JFrame
 		add(lbl_mensaje);
 		
 		btn_aceptar=new JButton("aceptar");
-		btn_aceptar.setBounds(70, 40, 100, 30);
+		btn_aceptar.setBounds(70, 40, 150, 30);
 		add(btn_aceptar);
 		
 		setVisible(true);

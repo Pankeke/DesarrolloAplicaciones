@@ -5,27 +5,30 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class HelloWorld3 extends JFrame implements ActionListener
+public class HelloWorld4 extends JFrame implements ActionListener
 {
 	private JLabel lbl_mensaje;
 	private JButton btn_aceptar;
 	private JTextField tf_mensaje;
 	
 	
-	public HelloWorld3()
+	public HelloWorld4()
 	{
-		super("Hello World 3 !!!!");
-		setSize(400,200);
-		setLayout(new FlowLayout());
+		super("Hello World 4 !!!!");
+		setLayout(null);
+		setSize(275,190);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		lbl_mensaje=new JLabel();
+		lbl_mensaje.setBounds(50, 10, 150, 30);
 		add(lbl_mensaje);
 		
 		tf_mensaje=new JTextField(20);
+		tf_mensaje.setBounds(50, 10, 150, 30);
 		add(tf_mensaje);
 		
 		btn_aceptar=new JButton("Aceptar");
+		btn_aceptar.setBounds(75, 45, 100, 20);
 		btn_aceptar.addActionListener(this);
 		add(btn_aceptar);
 		
@@ -34,7 +37,7 @@ public class HelloWorld3 extends JFrame implements ActionListener
 	
 	public static void main(String[] args)
 	{
-		HelloWorld3 ventana = new HelloWorld3();
+		HelloWorld4 ventana = new HelloWorld4();
 		
 	}
 
@@ -47,7 +50,7 @@ public class HelloWorld3 extends JFrame implements ActionListener
 			nombre=tf_mensaje.getText();
 			lbl_mensaje.setText("Hello "+nombre);
 			//tf_mensaje.setVisible(false);
-			//tf_mensaje.setEnabled(false);
+			////tf_mensaje.setEnabled(false);
 			tf_mensaje.setText("");
 		}
 		
