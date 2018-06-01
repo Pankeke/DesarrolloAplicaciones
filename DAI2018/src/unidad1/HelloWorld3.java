@@ -19,7 +19,9 @@ public class HelloWorld3 extends JFrame implements ActionListener
 		setLayout(new FlowLayout());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		lbl_mensaje=new JLabel();
+		ImageIcon ic=new ImageIcon("youtube.png");
+		
+		lbl_mensaje=new JLabel(ic);
 		add(lbl_mensaje);
 		
 		tf_mensaje=new JTextField(20);
@@ -28,7 +30,8 @@ public class HelloWorld3 extends JFrame implements ActionListener
 		btn_aceptar=new JButton("Aceptar");
 		btn_aceptar.addActionListener(this);
 		add(btn_aceptar);
-		
+		Image im = Toolkit.getDefaultToolkit().getImage("youtube.png");
+		setIconImage(im);
 		setVisible(true);
 	}
 	
