@@ -1,8 +1,11 @@
-package unidad2;
+package Unidad2;
 
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import javax.swing.*;
 
 public class Login extends JFrame implements ActionListener
@@ -78,7 +81,18 @@ public class Login extends JFrame implements ActionListener
 		if(e.getSource()==btn_aceptar)
 		{
 			String u=tf_usuario.getText();
+			Pattern pattern = Pattern.compile("^[\\d]{6}?$");//Cualquier numero con limite de 6
+			Matcher m = pattern.matcher(u);
+			boolean b = m.matches();
+			//System.err.println(b);
+			
 			String p=String.valueOf(pf_contra.getPassword());
+			Pattern pattern1 = Pattern.compile("^[a-zA-Z0-9\\W]++$");//Numeros(0-9), Letras minusculas y minusculas(a-zA-Z) y \\W para caracteres especiales almenos una vez
+			Matcher m1 = pattern1.matcher(p);
+			boolean b1 = m1.matches();
+			System.err.println(b1);
+			
+			/*
 			if(u.equals("abrete") && p.equals("sesamo"))
 			{
 				lbl_img_ok.setIcon(new ImageIcon("img_214754.png"));
@@ -86,7 +100,7 @@ public class Login extends JFrame implements ActionListener
 			else
 			{
 				lbl_img_ok.setIcon(new ImageIcon("images.png"));
-			}
+			}*/
 		}
 		
 		if(e.getSource()==btn_borrar)

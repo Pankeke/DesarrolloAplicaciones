@@ -1,9 +1,11 @@
-package unidad2;
+package kk;
 
 import java.awt.Image;
 import java.awt.List;
 import java.awt.Toolkit;
 import java.awt.event.*;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.io.*;
 
@@ -109,11 +111,6 @@ public class Usuario
 
 
 
-	public void setImagen(Image imagen) {
-		this.imagen = imagen;
-	}
-
-
 
 	public File getFoto() {
 		return foto;
@@ -122,7 +119,17 @@ public class Usuario
 
 
 	public void setFoto(File foto) {
-		this.foto = foto;
+		
+		
+		try
+		{
+			this.foto = foto;
+			Image imagen= ImageIO.read(this.foto);
+			this.imagen=imagen;
+		} catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
 	}
 
 
@@ -135,12 +142,5 @@ public class Usuario
 	}
 
 
-
-	public static void main(String[] args)
-	
-	{
-		// TODO Auto-generated method stub
-
-	}
 
 }

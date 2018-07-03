@@ -1,9 +1,11 @@
-package unidad2;
+package kk;
 
 import java.awt.Image;
 import java.awt.List;
 import java.awt.Toolkit;
 import java.awt.event.*;
+import java.io.File;
+
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -13,9 +15,15 @@ public class Usuario_agrega extends JFrame implements ActionListener
 	private JTextField tf_matricula,tf_nombre,tf_direccion,tf_telefono,tf_contacto;
 	private String[] sexo={"Masculino","Femenino"};
 	private JRadioButton a,b,o;
+	private JComboBox cb_sexo;
 	private JButton btn_aceptar, btn_cancelar, btn_regresar, btn_seleccionarimagen;
 	private Usuario usuario=new Usuario();
 	private JFileChooser fc_imagen;
+	private ImageIcon ic;
+	boolean bs;
+	File foto_usuario;
+	private ButtonGroup sangreGroup;
+	private UsuariosDAO usuarios_dao=new UsuariosDAO();
 	public Usuario_agrega()
 	{
 		super("Agregar usuario");
@@ -58,7 +66,7 @@ public class Usuario_agrega extends JFrame implements ActionListener
 		lbl_tiposangre.setBounds(277,195,100,30);
 		add(lbl_tiposangre);
 		
-		lbl_imagen_usuario=new JLabel(new ImageIcon("icono.png"));
+		lbl_imagen_usuario=new JLabel(new ImageIcon(""));
 		lbl_imagen_usuario.setBounds(600,0,200,250);
 		add(lbl_imagen_usuario);
 		
@@ -75,11 +83,11 @@ public class Usuario_agrega extends JFrame implements ActionListener
 		add(tf_matricula);
 		
 		tf_nombre=new JTextField();
-		tf_nombre.setBounds(342,52,270,20);
+		tf_nombre.setBounds(342,52,230,20);
 		add(tf_nombre);
 		
 		tf_direccion=new JTextField();
-		tf_direccion.setBounds(342,82,270,20);
+		tf_direccion.setBounds(342,82,230,20);
 		add(tf_direccion);
 		
 		tf_telefono=new JTextField();
@@ -90,9 +98,9 @@ public class Usuario_agrega extends JFrame implements ActionListener
 		tf_contacto.setBounds(382,142,150,20);
 		add(tf_contacto);
 		
-		JComboBox sexolist=new JComboBox(sexo);
-		sexolist.setBounds(337,170,100,20);
-		add(sexolist);
+		cb_sexo=new JComboBox(sexo);
+		cb_sexo.setBounds(337,170,100,20);
+		add(cb_sexo);
 		
 		a=new JRadioButton("A+");
 		a.setBounds(357,200,40,20);
@@ -105,6 +113,11 @@ public class Usuario_agrega extends JFrame implements ActionListener
 		o=new JRadioButton("O+");
 		o.setBounds(467,200,50,20);
 		add(o);
+		
+		sangreGroup=new ButtonGroup();
+		sangreGroup.add(a);
+		sangreGroup.add(b);
+		sangreGroup.add(o);
 		
 		btn_aceptar=new JButton("Aceptar");
 		btn_aceptar.setBounds(277,300,100,30);
@@ -140,6 +153,30 @@ public class Usuario_agrega extends JFrame implements ActionListener
 			usuario.setDireccion(tf_direccion.getText());
 			usuario.setTelefono(tf_telefono.getText());
 			usuario.setTelefono_contacto(tf_contacto.getText());
+			usuario.setFoto(foto_usuario);
+			//boolean bs; //= (cb_sexo.getSelectedIndex() == 1) ? true : false;
+			if (cb_sexo.getSelectedIndex()==1)
+			{
+				bs=true;
+			}
+			else
+			{
+				bs=false;
+			}
+			usuario.setSexo(bs);
+			
+			char ts=(a.isSelected()) ? 'a' : 'b';
+			usuario.setTipo_sangre(ts);
+			
+			if(usuarios_dao.agregarUsuario(usuario))
+			{
+				JOptionPane.showMessageDialog(null, "Usuario agregado");
+			}
+			else
+			{
+				JOptionPane.showMessageDialog(null, "Usuario no agregado");
+			}
+			
 			
 			System.out.println(usuario);
 		}
@@ -148,7 +185,12 @@ public class Usuario_agrega extends JFrame implements ActionListener
 			int valor =fc_imagen.showOpenDialog(this);
 			if(valor==JFileChooser.APPROVE_OPTION)
 			{
-				
+				//ImageIcon imagen=new ImageIcon(fc_imagen.getSelectedFile().getAbsolutePath()).setImage(imagen);
+				ImageIcon imagen=new ImageIcon(fc_imagen.getSelectedFile().getAbsolutePath());
+				lbl_imagen_usuario.setIcon(imagen);
+				ic=new ImageIcon(imagen.getImage().getScaledInstance(200, 150, Image.SCALE_DEFAULT));
+				lbl_imagen_usuario.setIcon(ic);
+				foto_usuario=new File(fc_imagen.getSelectedFile().getPath());
 			}
 		}
 		
