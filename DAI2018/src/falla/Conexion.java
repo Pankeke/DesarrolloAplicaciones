@@ -1,4 +1,4 @@
-package Unidad2;
+package falla;
 
 public class Conexion 
 {

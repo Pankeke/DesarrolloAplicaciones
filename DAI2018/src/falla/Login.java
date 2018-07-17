@@ -1,4 +1,4 @@
-package Unidad2;
+package falla;
 
 import java.awt.Image;
 import java.awt.Toolkit;
